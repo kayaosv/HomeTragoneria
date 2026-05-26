@@ -1,4 +1,0 @@
-[     354ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js:29904
-[     496ms] [WARNING] You are using the in-browser Babel transformer. Be sure to precompile your scripts for production - https://babeljs.io/docs/setup/ @ https://unpkg.com/@babel/standalone@7.29.0/babel.min.js:2
-[     592ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8080/favicon.ico:0
-[   27464ms] [INFO] Launched external handler for 'mailto:hola@latragoneria.com'. @ http://localhost:8080/Home%20-%20La%20Tragoneria.html#destacados:0
