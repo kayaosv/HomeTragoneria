@@ -1,0 +1,321 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "La Tragonería SEVILLA · 2005" [ref=e3] [cursor=pointer]:
+      - /url: "#"
+      - text: La Tragonería
+      - generic [ref=e4]: SEVILLA · 2005
+    - navigation [ref=e5]:
+      - list [ref=e6]:
+        - listitem [ref=e7]:
+          - link "Tienda" [ref=e8] [cursor=pointer]:
+            - /url: "#categorias"
+        - listitem [ref=e9]:
+          - link "Destacados" [ref=e10] [cursor=pointer]:
+            - /url: "#destacados"
+        - listitem [ref=e11]:
+          - link "Cestas" [ref=e12] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=e13]:
+          - link "Visítanos" [ref=e14] [cursor=pointer]:
+            - /url: "#tienda"
+        - listitem [ref=e15]:
+          - link "Nosotros" [ref=e16] [cursor=pointer]:
+            - /url: "#"
+    - generic [ref=e17]:
+      - button "Buscar" [ref=e18] [cursor=pointer]:
+        - img [ref=e19]
+      - link "Comprar" [ref=e22] [cursor=pointer]:
+        - /url: "#categorias"
+      - button "Carrito" [ref=e23] [cursor=pointer]:
+        - img [ref=e24]
+        - text: "3"
+  - generic [ref=e29]:
+    - generic [ref=e30]:
+      - generic [ref=e33]: 00 — Delicatessen en Sevilla · Est. 2005
+      - heading "20 años eligiendo lo mejor de España." [level=1] [ref=e34]:
+        - text: 20 años
+        - text: eligiendo lo mejor
+        - text: de España.
+      - paragraph [ref=e35]: Tienda gourmet en Sevilla · Envío a toda España.
+      - generic [ref=e36]:
+        - link "Explorar tienda" [ref=e37] [cursor=pointer]:
+          - /url: "#categorias"
+          - text: Explorar tienda
+          - img [ref=e38]
+        - link "Crear tu cesta" [ref=e40] [cursor=pointer]:
+          - /url: "#"
+    - generic [ref=e41]:
+      - generic [ref=e43]:
+        - generic:
+          - button "Replace"
+          - button "Remove"
+      - generic [ref=e45]:
+        - generic [ref=e46]: Selección de la casa
+        - generic [ref=e47]: Cesta Reserva Andalucía
+        - generic [ref=e48]: 12 productos · packaging artesano
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]: Productos
+          - generic [ref=e53]: 516 referencias
+        - generic [ref=e54]:
+          - generic [ref=e55]: Envío
+          - generic [ref=e56]: Península 24–48h
+        - generic [ref=e57]:
+          - generic [ref=e58]: Tienda física
+          - generic [ref=e59]: C/ Sierpes, Sevilla
+      - generic [ref=e61]: Desplázate
+  - generic [ref=e63]:
+    - generic [ref=e64]:
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - generic [ref=e68]: 01 —
+          - text: Categorías
+        - heading "Selección por familia de producto." [level=2] [ref=e69]:
+          - text: Selección por
+          - emphasis [ref=e70]: familia
+          - text: de producto.
+      - paragraph [ref=e71]: Seis familias, 516 referencias. Cada producto se prueba en tienda antes de entrar al catálogo.
+    - generic [ref=e72]:
+      - link "01 Quesos artesanos 142 ref." [ref=e73] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e74]:
+          - generic [ref=e76]: "01"
+          - img [ref=e78]
+          - generic [ref=e80]:
+            - heading "Quesos artesanos" [level=3] [ref=e81]
+            - generic [ref=e82]: 142 ref.
+      - link "02 Vinos & vermuts 98 ref." [ref=e83] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e84]:
+          - generic [ref=e86]: "02"
+          - img [ref=e88]
+          - generic [ref=e90]:
+            - heading "Vinos & vermuts" [level=3] [ref=e91]
+            - generic [ref=e92]: 98 ref.
+      - link "03 Ibéricos 64 ref." [ref=e93] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e94]:
+          - generic [ref=e96]: "03"
+          - img [ref=e98]
+          - generic [ref=e100]:
+            - heading "Ibéricos" [level=3] [ref=e101]
+            - generic [ref=e102]: 64 ref.
+      - link "04 Aceites & vinagres 52 ref." [ref=e103] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e104]:
+          - generic [ref=e106]: "04"
+          - img [ref=e108]
+          - generic [ref=e110]:
+            - heading "Aceites & vinagres" [level=3] [ref=e111]
+            - generic [ref=e112]: 52 ref.
+      - link "05 Conservas & ahumados 87 ref." [ref=e113] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e114]:
+          - generic [ref=e116]: "05"
+          - img [ref=e118]
+          - generic [ref=e120]:
+            - heading "Conservas & ahumados" [level=3] [ref=e121]
+            - generic [ref=e122]: 87 ref.
+      - link "06 Eco & artesano 73 ref." [ref=e123] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e124]:
+          - generic [ref=e126]: "06"
+          - img [ref=e128]
+          - generic [ref=e130]:
+            - heading "Eco & artesano" [level=3] [ref=e131]
+            - generic [ref=e132]: 73 ref.
+  - generic [ref=e133]:
+    - generic [ref=e134]:
+      - generic [ref=e135]:
+        - generic [ref=e136]:
+          - generic [ref=e138]: 02 —
+          - text: Lo más pedido
+        - heading "Los favoritos de la casa." [level=2] [ref=e139]:
+          - text: Los favoritos
+          - emphasis [ref=e140]: de la casa.
+      - paragraph [ref=e141]: Lo que los clientes piden semana tras semana. Producto fresco, rotación constante.
+    - generic [ref=e142]:
+      - link "Ibérico Añadir al carrito Jamón Ibérico de Bellota Pieza entera · 7 kg aprox. 389 €/pza D.O. Jabugo" [ref=e143] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e144]:
+          - generic [ref=e146]: Ibérico
+          - button "Añadir al carrito" [ref=e147]:
+            - img [ref=e148]
+        - generic [ref=e150]:
+          - heading "Jamón Ibérico de Bellota" [level=3] [ref=e151]
+          - paragraph [ref=e152]: Pieza entera · 7 kg aprox.
+          - generic [ref=e153]:
+            - generic [ref=e154]: 389 €/pza
+            - generic [ref=e155]: D.O. Jabugo
+      - link "Queso Añadir al carrito Torta del Casar Queso crudo de oveja · 500 g 24 €/ud D.O.P." [ref=e156] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e157]:
+          - generic [ref=e159]: Queso
+          - button "Añadir al carrito" [ref=e160]:
+            - img [ref=e161]
+        - generic [ref=e163]:
+          - heading "Torta del Casar" [level=3] [ref=e164]
+          - paragraph [ref=e165]: Queso crudo de oveja · 500 g
+          - generic [ref=e166]:
+            - generic [ref=e167]: 24 €/ud
+            - generic [ref=e168]: D.O.P.
+      - link "Aceite Añadir al carrito Picual Extra Virgen Cosecha temprana · 500 ml 18 €/ud Jaén · Eco" [ref=e169] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e170]:
+          - generic [ref=e172]: Aceite
+          - button "Añadir al carrito" [ref=e173]:
+            - img [ref=e174]
+        - generic [ref=e176]:
+          - heading "Picual Extra Virgen" [level=3] [ref=e177]
+          - paragraph [ref=e178]: Cosecha temprana · 500 ml
+          - generic [ref=e179]:
+            - generic [ref=e180]: 18 €/ud
+            - generic [ref=e181]: Jaén · Eco
+      - link "Vino Añadir al carrito Vermut Reserva Botánicos andaluces · 750 ml 21 €/ud Sevilla" [ref=e182] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=e183]:
+          - generic [ref=e185]: Vino
+          - button "Añadir al carrito" [ref=e186]:
+            - img [ref=e187]
+        - generic [ref=e189]:
+          - heading "Vermut Reserva" [level=3] [ref=e190]
+          - paragraph [ref=e191]: Botánicos andaluces · 750 ml
+          - generic [ref=e192]:
+            - generic [ref=e193]: 21 €/ud
+            - generic [ref=e194]: Sevilla
+  - generic [ref=e196]:
+    - generic [ref=e197]:
+      - generic [ref=e199]: 03 —
+      - text: Manifiesto
+    - paragraph [ref=e200]:
+      - text: "516 productos. Un solo criterio:"
+      - emphasis [ref=e201]: que merezcan estar aquí.
+    - generic [ref=e204]: La Tragonería · Sevilla
+  - generic [ref=e207]:
+    - generic [ref=e208]:
+      - generic [ref=e209]:
+        - generic [ref=e211] [cursor=pointer]:
+          - img [ref=e212]
+          - generic [ref=e216]: Foto del local — interior, escaparate o detalle de la barra
+        - generic:
+          - button "Replace"
+          - button "Remove"
+      - generic [ref=e217]: C/ Sierpes 34 · Sevilla
+    - generic [ref=e218]:
+      - generic [ref=e219]:
+        - generic [ref=e221]: 04 —
+        - text: Tienda física
+      - heading "Pasa a probar antes de comprar." [level=2] [ref=e222]:
+        - text: Pasa a probar antes de
+        - emphasis [ref=e223]: comprar.
+      - paragraph [ref=e224]: En pleno centro de Sevilla. Cortamos jamón al momento, descorchamos lo que pidas y montamos cestas mientras esperas. Si vienes con tiempo, te invitamos a una cata.
+      - generic [ref=e225]:
+        - generic [ref=e226]:
+          - generic [ref=e227]: Dirección
+          - generic [ref=e228]:
+            - text: Calle Sierpes, 34
+            - generic [ref=e229]: 41004 Sevilla
+        - generic [ref=e230]:
+          - generic [ref=e231]: Horario
+          - generic [ref=e232]:
+            - text: Lun — Sáb · 10–21h
+            - generic [ref=e233]: Domingos cerrado
+        - generic [ref=e234]:
+          - generic [ref=e235]: Teléfono
+          - generic [ref=e236]:
+            - text: +34 954 22 18 60
+            - generic [ref=e237]: WhatsApp disponible
+        - generic [ref=e238]:
+          - generic [ref=e239]: Reservas
+          - generic [ref=e240]:
+            - text: Catas privadas
+            - generic [ref=e241]: Hasta 12 personas
+      - link "Cómo llegar" [ref=e243] [cursor=pointer]:
+        - /url: https://www.google.com/maps/place/La+Tragoner%C3%ADa+Gourmet+y+Vinos+Sevilla/@37.38756,-5.970819,18z/data=!4m6!3m5!1s0xd126ebb3deeac2d:0xf6bab33da520daf6!8m2!3d37.3875603!4d-5.9708189!16s%2Fg%2F12jskqrgf
+        - text: Cómo llegar
+        - img [ref=e244]
+  - generic [ref=e247]:
+    - generic [ref=e248]:
+      - generic [ref=e250]: 05 —
+      - text: Carta de novedades
+    - heading "Nuevas entradas, catas y cestas — una vez al mes." [level=2] [ref=e251]:
+      - text: Nuevas entradas, catas y cestas —
+      - emphasis [ref=e252]: una vez al mes.
+    - generic [ref=e253]:
+      - textbox "tu@correo.com" [ref=e254]
+      - button "Suscribirme" [ref=e255] [cursor=pointer]
+    - paragraph [ref=e256]: Sin spam. Cancela cuando quieras.
+  - contentinfo [ref=e257]:
+    - generic [ref=e258]:
+      - generic [ref=e259]:
+        - generic [ref=e260]: La Tragonería
+        - paragraph [ref=e261]: Tienda gourmet en Sevilla desde 2005. Selección, corte y envío de delicatessen a toda España.
+        - generic [ref=e262]:
+          - generic [ref=e263]: SSL
+          - generic [ref=e264]: Pago seguro
+          - generic [ref=e265]: Envío 24/48h
+        - generic [ref=e266]:
+          - link "Instagram" [ref=e267] [cursor=pointer]:
+            - /url: https://www.instagram.com/la_tragoneria/
+            - img [ref=e268]
+          - link "Google Maps" [ref=e272] [cursor=pointer]:
+            - /url: https://www.google.com/maps/place/La+Tragoner%C3%ADa+Gourmet+y+Vinos+Sevilla/@37.38756,-5.970819,18z/data=!4m6!3m5!1s0xd126ebb3deeac2d:0xf6bab33da520daf6!8m2!3d37.3875603!4d-5.9708189!16s%2Fg%2F12jskqrgf
+            - img [ref=e273]
+          - link "Email" [ref=e276] [cursor=pointer]:
+            - /url: mailto:hola@latragoneria.com
+            - img [ref=e277]
+          - link "WhatsApp" [ref=e280] [cursor=pointer]:
+            - /url: https://wa.me/34626904944
+            - img [ref=e281]
+      - generic [ref=e283]:
+        - heading "Tienda" [level=4] [ref=e284]
+        - list [ref=e285]:
+          - listitem [ref=e286]:
+            - link "Quesos" [ref=e287] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e288]:
+            - link "Vinos" [ref=e289] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e290]:
+            - link "Ibéricos" [ref=e291] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e292]:
+            - link "Aceites" [ref=e293] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e294]:
+            - link "Cestas" [ref=e295] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e296]:
+        - heading "Empresa" [level=4] [ref=e297]
+        - list [ref=e298]:
+          - listitem [ref=e299]:
+            - link "Sobre nosotros" [ref=e300] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e301]:
+            - link "Tienda física" [ref=e302] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e303]:
+            - link "Catas privadas" [ref=e304] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e305]:
+            - link "Empresas" [ref=e306] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e307]:
+        - heading "Ayuda" [level=4] [ref=e308]
+        - list [ref=e309]:
+          - listitem [ref=e310]:
+            - link "Envíos" [ref=e311] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e312]:
+            - link "Devoluciones" [ref=e313] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e314]:
+            - link "Contacto" [ref=e315] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e316]:
+            - link "Aviso legal" [ref=e317] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=e318]:
+      - generic [ref=e319]: © 2026 LA TRAGONERÍA · SEVILLA
+      - generic [ref=e320]: HECHO CON CARIÑO EN ANDALUCÍA

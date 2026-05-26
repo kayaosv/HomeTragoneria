@@ -1,0 +1,1744 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>La Tragonería — Home</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* =====================================================
+     PALETTE — restrained: lila como tinta + acento, NO base
+     ===================================================== */
+  :root{
+    /* Brand */
+    --deep:   #6B5B95;   /* tinta principal (texto + headings) */
+    --mid:    #8E7CC3;   /* acento → CTAs, hover, eyebrow dot */
+    --light:  #C8BFE7;   /* hairline, decoración */
+    --soft:   #E8E4F0;   /* lila pálido — usar con cuidado */
+
+    /* Base */
+    --paper:  #FAF7F1;   /* cream — fondo principal del sitio */
+    --paper-2:#F4F0E8;   /* cream un punto más cálido */
+    --white:  #FFFFFF;
+    --ink:    #2A2333;   /* texto más oscuro cuando se necesita peso */
+
+    /* Tipo */
+    --serif: "Playfair Display", "Times New Roman", serif;
+    --sans:  "DM Sans", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, "Menlo", monospace;
+
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+
+    --page-pad: clamp(20px, 4vw, 64px);
+    --max-w: 1480px;
+  }
+
+  *{ box-sizing: border-box; }
+  html, body{ margin:0; padding:0; }
+  body{
+    font-family: var(--sans);
+    color: var(--deep);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a{ color:inherit; text-decoration:none; }
+  button, input{ font-family: inherit; }
+  button{ cursor: pointer; border: none; background: none; color:inherit; }
+  img{ display:block; max-width:100%; }
+
+  /* =====================================================
+     SHARED                                                */
+  .eyebrow{
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  .eyebrow .dot{
+    width: 6px; height: 6px; border-radius: 999px;
+    background: var(--mid);
+    box-shadow: 0 0 0 4px rgba(142,124,195,.15);
+  }
+  .eyebrow .idx{ color: var(--deep); opacity: .5; }
+
+  .btn{
+    display: inline-flex; align-items: center; gap: 10px;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: 2px;
+    font-family: var(--sans);
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background .25s var(--ease), color .25s var(--ease),
+                border-color .25s var(--ease), transform .15s var(--ease);
+    white-space: nowrap;
+  }
+  .btn:active{ transform: scale(.985); }
+  .btn svg{
+    width: 14px; height: 14px; stroke-width: 1.6;
+    transition: transform .35s var(--ease);
+  }
+  .btn:hover svg{ transform: translateX(4px); }
+
+  .btn--primary{ background: var(--mid); color: var(--white); }
+  .btn--primary:hover{ background: var(--deep); }
+
+  .btn--ink{
+    background: var(--deep); color: var(--paper);
+  }
+  .btn--ink:hover{ background: var(--ink); }
+
+  .btn--ghost{
+    background: transparent;
+    color: var(--deep);
+    border: 1px solid var(--deep);
+  }
+  .btn--ghost:hover{ background: var(--deep); color: var(--paper); }
+
+  .btn--text{
+    height: auto; padding: 6px 0;
+    background: none; color: var(--deep);
+    border-bottom: 1px solid var(--deep);
+    border-radius: 0;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+  }
+  .btn--text:hover{ color: var(--mid); border-color: var(--mid); }
+
+  /* Generic section header */
+  .section-head{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+    padding: 0 var(--page-pad);
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding-bottom: clamp(40px, 5vh, 64px);
+  }
+  .section-head .title{
+    grid-column: 1;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(32px, 4.2vw, 64px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--deep);
+    margin: 18px 0 0;
+    max-width: 18ch;
+    text-wrap: balance;
+  }
+  .section-head .title em{
+    font-style: italic;
+    color: var(--mid);
+    font-weight: 400;
+  }
+  .section-head .right{
+    grid-column: 2;
+    align-self: end;
+    text-align: right;
+    color: var(--deep);
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: .75;
+    max-width: 320px;
+  }
+
+  /* Scroll-reveal utility (driven by GSAP — fallback: visible) */
+  .gs-reveal{ opacity: 1; }
+  .gs-ready .gs-reveal{ opacity: 0; transform: translateY(28px); }
+
+  /* =====================================================
+     NAV                                                   */
+  .nav{
+    position: fixed; top:0; left:0; right:0; z-index: 50;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 16px var(--page-pad);
+    background: rgba(250, 247, 241, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: background .4s var(--ease), border-color .4s var(--ease);
+  }
+  .nav.is-scrolled{
+    background: rgba(250, 247, 241, 0.96);
+    border-bottom-color: var(--soft);
+  }
+
+  .nav__logo{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--deep);
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .nav__logo small{
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .nav__links{
+    grid-column: 2;
+    display: flex; gap: 32px;
+    list-style: none; margin: 0; padding: 0;
+    font-size: 14px; font-weight: 500;
+    color: var(--deep);
+    justify-content: center;
+  }
+  .nav__links a{
+    position: relative;
+    padding: 8px 2px;
+  }
+  .nav__links a::after{
+    content:"";
+    position: absolute; left:0; right:100%; bottom: 4px;
+    height: 1px; background: var(--mid);
+    transition: right .35s var(--ease);
+  }
+  .nav__links a:hover{ color: var(--mid); }
+  .nav__links a:hover::after{ right: 0; }
+
+  .nav__right{
+    grid-column: 3;
+    display: flex; align-items: center; justify-content: flex-end; gap: 14px;
+  }
+  .icon-btn{
+    width: 38px; height: 38px;
+    display: grid; place-items: center;
+    border-radius: 999px;
+    color: var(--deep);
+    transition: background .25s var(--ease), color .25s var(--ease);
+    position: relative;
+  }
+  .icon-btn svg{ width: 18px; height: 18px; stroke-width: 1.5; }
+  .icon-btn:hover{ background: var(--soft); }
+  .cart-dot::after{
+    content:"3";
+    position:absolute; top: 4px; right: 4px;
+    background: var(--mid); color: var(--white);
+    font-family: var(--mono);
+    font-size: 9px; font-weight: 500;
+    width: 14px; height: 14px;
+    display:grid; place-items:center;
+    border-radius: 999px;
+    line-height: 1;
+  }
+  .nav .btn--cta{
+    height: 38px; padding: 0 16px;
+    font-size: 11px;
+    border-radius: 2px;
+  }
+
+  /* =====================================================
+     HERO — cream base, lila como tinta + acento puntual    */
+  .hero{
+    position: relative;
+    background: var(--paper);
+    color: var(--deep);
+    padding-top: 84px;
+    overflow: hidden;
+  }
+  .hero__inner{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--page-pad);
+    min-height: calc(100vh - 84px);
+    display: grid;
+    grid-template-columns: 7fr 6fr;
+    grid-template-rows: 1fr auto;
+    column-gap: clamp(32px, 5vw, 96px);
+    align-items: end;
+    padding-top: clamp(48px, 7vh, 96px);
+    padding-bottom: clamp(40px, 6vh, 80px);
+  }
+
+  .hero__copy{
+    grid-column: 1; grid-row: 1;
+    align-self: end;
+    max-width: 720px;
+    padding-bottom: clamp(8px, 3vh, 32px);
+  }
+  .hero__eyebrow{ margin-bottom: clamp(28px, 5vh, 48px); }
+
+  .hero__headline{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(48px, 7.4vw, 112px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: var(--deep);
+    text-wrap: balance;
+  }
+  .hero__headline .accent{
+    font-style: italic;
+    font-weight: 400;
+    color: var(--mid);
+  }
+  .hero__headline .num{
+    font-weight: 600;
+    font-feature-settings: "lnum";
+  }
+
+  .hero__subline{
+    margin-top: clamp(28px, 4vh, 44px);
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.15vw, 17px);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--deep);
+    opacity: .75;
+    max-width: 460px;
+  }
+  .hero__subline .sep{ color: var(--mid); margin: 0 10px; opacity:.8; }
+
+  .hero__ctas{
+    margin-top: clamp(32px, 4.5vh, 48px);
+    display: flex; flex-wrap: wrap; gap: 14px;
+  }
+
+  /* Right: image */
+  .hero__media{
+    grid-column: 2; grid-row: 1;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    min-height: clamp(420px, 60vh, 720px);
+  }
+  .hero__frame{
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 6%;
+    right: calc(var(--page-pad) * -1 - 24px);
+    overflow: hidden;
+    /* Image w/ warm gradient fallback */
+    background:
+      url('https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat,
+      linear-gradient(155deg, #c9a880 0%, #8a6d4f 55%, #4a3724 100%);
+    box-shadow:
+      0 30px 60px -30px rgba(74,55,36,.4),
+      0 8px 20px -10px rgba(74,55,36,.25);
+  }
+  .hero__frame image-slot{ position:absolute; inset:0; width:100%; height:100%; }
+  .hero__frame::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(80% 60% at 30% 20%, rgba(255,255,255,.08), transparent 60%),
+      linear-gradient(180deg, transparent 60%, rgba(40,30,20,.25) 100%);
+    pointer-events:none;
+  }
+
+  .hero__tag{
+    position: absolute;
+    right: 20px; bottom: 20px;
+    z-index: 3;
+    background: var(--paper);
+    color: var(--deep);
+    padding: 16px 22px;
+    display: flex; flex-direction: column; gap: 4px;
+    box-shadow: 0 20px 40px -18px rgba(42,35,51,.25);
+    min-width: 220px;
+    max-width: 280px;
+    border: 1px solid var(--soft);
+  }
+  .hero__tag .lab{
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  .hero__tag .name{
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .hero__tag .meta{
+    font-size: 12px;
+    color: var(--deep);
+    opacity: .65;
+    margin-top: 2px;
+  }
+
+  .hero__bottom{
+    grid-column: 1 / -1; grid-row: 2;
+    display: flex; justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    padding-top: clamp(48px, 7vh, 72px);
+    border-top: 1px solid var(--soft);
+    margin-top: clamp(56px, 8vh, 88px);
+    z-index: 4;
+  }
+  .hero__meta{ display: flex; gap: clamp(28px, 4vw, 64px); flex-wrap: wrap; }
+  .meta-item{ display: flex; flex-direction: column; gap: 6px; }
+  .meta-item .k{
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 500;
+  }
+  .meta-item .v{
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.4vw, 22px);
+    color: var(--deep);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .hero__scroll{
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 500;
+  }
+  .hero__scroll .line{
+    display:inline-block;
+    width: 56px; height: 1px;
+    background: var(--light);
+    position: relative; overflow:hidden;
+  }
+  .hero__scroll .line::after{
+    content:""; position:absolute; inset:0;
+    background: var(--mid);
+    transform-origin: left center;
+    animation: scrollLine 2.4s var(--ease-io) infinite;
+  }
+  @keyframes scrollLine{
+    0%   { transform: scaleX(0); transform-origin: left; }
+    50%  { transform: scaleX(1); transform-origin: left; }
+    50.01%{transform: scaleX(1); transform-origin: right; }
+    100% { transform: scaleX(0); transform-origin: right; }
+  }
+
+  /* =====================================================
+     CATEGORÍAS — asimétrico, cards con hover                */
+  .categorias{
+    padding: clamp(96px, 14vh, 160px) 0 clamp(64px, 10vh, 120px);
+    background: var(--paper);
+  }
+  .cat-grid{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--page-pad);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(16px, 1.8vw, 28px) clamp(16px, 1.8vw, 24px);
+  }
+  .cat-card{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: var(--paper-2);
+    text-decoration: none;
+    color: var(--deep);
+  }
+  .cat-card__media{
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+  .cat-card__bg{
+    position:absolute; inset:0;
+    transition: transform .8s var(--ease);
+    will-change: transform;
+  }
+  .cat-card:hover .cat-card__bg{ transform: scale(1.04); }
+
+  /* Per-category warm placeholders (within taste — desaturados, no compiten con lila) */
+  .cat-card--quesos .cat-card__bg{
+    background:
+      url('https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=900&q=80') center/cover no-repeat,
+      linear-gradient(160deg, #e8d6a8 0%, #b89764 55%, #6b502f 100%);
+  }
+  .cat-card--vinos .cat-card__bg{
+    background:
+      url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=80') center/cover no-repeat,
+      linear-gradient(170deg, #8a3a44 0%, #5a212a 60%, #2c1015 100%);
+  }
+  .cat-card--ibericos .cat-card__bg{
+    background:
+      url('https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRRJaq24-XrkUQyjM_dUwFME9ituhRoWvUqNGspNsduQr-ebythHZorLY7gBBfQvmF179hlVK7ZNj3SacapZS1LNOUTcjawwQ') center/cover no-repeat,
+      linear-gradient(160deg, #c97b6b 0%, #8a3f3a 55%, #4a1e22 100%);
+  }
+  .cat-card--aceites .cat-card__bg{
+    background:
+      url('https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=900&q=80') center/cover no-repeat,
+      linear-gradient(170deg, #a8a050 0%, #7a6e2f 55%, #3d3712 100%);
+  }
+  .cat-card--conservas .cat-card__bg{
+    background:
+      url('https://marujamaria.com/wp-content/uploads/2021/04/Sotavento-Jurelillos-Ahumados-e1631950774314.jpg') center/cover no-repeat,
+      linear-gradient(165deg, #6b7d80 0%, #3f5358 55%, #1d2e33 100%);
+  }
+  .cat-card--eco .cat-card__bg{
+    background:
+      url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80') center/cover no-repeat,
+      linear-gradient(165deg, #8aa86b 0%, #506f3f 55%, #233018 100%);
+  }
+  .cat-card__media::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, transparent 50%, rgba(20,15,25,.45) 100%);
+    pointer-events:none;
+  }
+  .cat-card__label{
+    position: absolute;
+    top: 16px; left: 16px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(20,15,25,.35);
+    padding: 6px 10px;
+    backdrop-filter: blur(6px);
+  }
+  .cat-card__info{
+    position: absolute;
+    left: 20px; right: 20px; bottom: 20px;
+    display: flex; align-items: end; justify-content: space-between;
+    gap: 16px;
+    color: var(--paper);
+  }
+  .cat-card__name{
+    font-family: var(--serif);
+    font-size: clamp(22px, 2vw, 32px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  .cat-card__count{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    opacity: .8;
+    flex-shrink: 0;
+  }
+  .cat-card__arrow{
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--deep);
+    display: grid; place-items: center;
+    transform: translate(8px, -8px) rotate(-30deg);
+    opacity: 0;
+    transition: transform .45s var(--ease), opacity .35s var(--ease);
+  }
+  .cat-card__arrow svg{ width: 14px; height: 14px; stroke-width: 1.8; }
+  .cat-card:hover .cat-card__arrow{
+    transform: translate(0,0) rotate(0deg);
+    opacity: 1;
+  }
+
+  /* Asymmetric spans */
+  .cat-card:nth-child(1){ grid-column: span 5; }
+  .cat-card:nth-child(2){ grid-column: span 4; }
+  .cat-card:nth-child(3){ grid-column: span 3; }
+  .cat-card:nth-child(4){ grid-column: span 4; }
+  .cat-card:nth-child(5){ grid-column: span 5; }
+  .cat-card:nth-child(6){ grid-column: span 3; }
+
+  /* =====================================================
+     DESTACADOS — productos                                  */
+  .destacados{
+    padding: clamp(96px, 14vh, 160px) 0 clamp(96px, 14vh, 140px);
+    background: var(--paper);
+    border-top: 1px solid var(--soft);
+  }
+  .prod-grid{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--page-pad);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 2.4vw, 36px);
+  }
+  .prod-card{
+    display: flex; flex-direction: column;
+    text-decoration: none;
+    color: var(--deep);
+    cursor: pointer;
+  }
+  .prod-card__media{
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background: var(--paper-2);
+    overflow: hidden;
+    border: 1px solid var(--soft);
+  }
+  .prod-card__bg{
+    position: absolute; inset: 0;
+    transition: transform .9s var(--ease);
+    will-change: transform;
+  }
+  .prod-card:hover .prod-card__bg{ transform: scale(1.04); }
+  .prod-card__media::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, transparent 70%, rgba(20,15,25,.18) 100%);
+    pointer-events:none;
+  }
+  .prod-card__tag{
+    position: absolute;
+    top: 14px; left: 14px;
+    background: var(--paper);
+    color: var(--mid);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 9px;
+    border: 1px solid var(--soft);
+  }
+  .prod-card__quick{
+    position: absolute;
+    bottom: 14px; right: 14px;
+    width: 40px; height: 40px;
+    background: var(--paper);
+    color: var(--deep);
+    display: grid; place-items: center;
+    border-radius: 999px;
+    transform: translateY(12px);
+    opacity: 0;
+    transition: transform .35s var(--ease), opacity .3s var(--ease), background .25s var(--ease);
+    box-shadow: 0 8px 20px -10px rgba(42,35,51,.3);
+  }
+  .prod-card__quick svg{ width: 16px; height: 16px; stroke-width: 1.6; }
+  .prod-card:hover .prod-card__quick{
+    opacity: 1; transform: translateY(0);
+  }
+  .prod-card__quick:hover{ background: var(--mid); color: var(--paper); }
+
+  .prod-card__info{
+    padding: 18px 4px 0;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .prod-card__name{
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--deep);
+    transition: color .25s var(--ease);
+  }
+  .prod-card:hover .prod-card__name{ color: var(--mid); }
+  .prod-card__sub{
+    font-size: 13px;
+    color: var(--deep);
+    opacity: .6;
+    margin: 0;
+  }
+  .prod-card__bottom{
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-top: 8px;
+  }
+  .prod-card__price{
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--deep);
+  }
+  .prod-card__price small{
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--deep);
+    opacity: .55;
+    margin-left: 4px;
+    font-weight: 400;
+  }
+  .prod-card__do{
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* Product images — Unsplash + warm gradient fallback */
+  .prod--p1 .prod-card__bg{
+    background:
+      url('https://images.unsplash.com/photo-1606851094291-6efae152bb87?auto=format&fit=crop&w=800&q=80') center/cover no-repeat,
+      linear-gradient(165deg, #c87a5a 0%, #8a3f30 60%, #4a1e1a 100%);
+  }
+  .prod--p2 .prod-card__bg{
+    background:
+      url('https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800&q=80') center/cover no-repeat,
+      linear-gradient(160deg, #e2cd95 0%, #b89460 55%, #6e4f28 100%);
+  }
+  .prod--p3 .prod-card__bg{
+    background:
+      url('https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR7EdWtH8lNCMvoFPFFxVTH2GEFWBhVsDQqIdbNs_IA49CkTFknO08D3YWwrE2e2_f21lUJEq5AFazrDbfnckmXaThkYAmIYvaGs-Ts0NCG3p3X0WQDhEHoQ-fN4tr0safKWg') center/cover no-repeat,
+      linear-gradient(170deg, #9a8a3a 0%, #6e5f1f 55%, #34280a 100%);
+  }
+  .prod--p4 .prod-card__bg{
+    background:
+      url('https://images.unsplash.com/photo-1547595628-c61a29f496f0?auto=format&fit=crop&w=800&q=80') center/cover no-repeat,
+      linear-gradient(170deg, #7a2e36 0%, #4d161e 60%, #240a0d 100%);
+  }
+
+  /* =====================================================
+     STATEMENT — la ÚNICA banda full-bleed lila              */
+  .statement{
+    position: relative;
+    background: var(--deep);
+    color: var(--paper);
+    padding: clamp(120px, 18vh, 200px) var(--page-pad);
+    overflow: hidden;
+  }
+  .statement::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(60% 50% at 80% 30%, rgba(200,191,231,.15), transparent 70%),
+      radial-gradient(40% 35% at 15% 85%, rgba(142,124,195,.18), transparent 75%);
+    pointer-events:none;
+  }
+  .statement::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: .5;
+    pointer-events:none;
+  }
+  .statement__inner{
+    position: relative; z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .statement__eyebrow{
+    color: var(--light);
+    margin-bottom: clamp(28px, 4vh, 40px);
+    justify-content: center;
+  }
+  .statement__eyebrow .dot{ background: var(--light); box-shadow: 0 0 0 4px rgba(200,191,231,.18); }
+  .statement__eyebrow .idx{ color: var(--paper); opacity: .55; }
+  .statement__text{
+    font-family: var(--serif);
+    font-size: clamp(32px, 4.6vw, 72px);
+    line-height: 1.12;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin: 0 auto;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .statement__text em{
+    font-style: italic;
+    color: var(--light);
+    font-weight: 400;
+  }
+  .statement__sign{
+    margin-top: clamp(40px, 6vh, 64px);
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--light);
+  }
+  .statement__sign .rule{
+    display:inline-block; width: 40px; height: 1px; background: var(--light); opacity: .5;
+  }
+
+  /* =====================================================
+     TIENDA FÍSICA                                          */
+  .tienda{
+    padding: clamp(96px, 14vh, 160px) 0;
+    background: var(--paper);
+  }
+  .tienda__grid{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--page-pad);
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: center;
+  }
+  .tienda__media{
+    position: relative;
+    aspect-ratio: 5 / 6;
+    overflow: hidden;
+    background:
+      url('https://www.latragoneria.com/wp-content/uploads/2021/06/IMG_20210629_105427-1536x656.jpg') center/cover no-repeat,
+      linear-gradient(165deg, #b8967a 0%, #7a5a45 55%, #3d2a1f 100%);
+  }
+  .tienda__media image-slot{ position:absolute; inset:0; width:100%; height:100%; }
+  .tienda__media::after{
+    content:""; position:absolute; inset:0;
+    background: linear-gradient(180deg, transparent 60%, rgba(20,15,10,.3) 100%);
+    pointer-events:none;
+  }
+  .tienda__media-tag{
+    position: absolute;
+    bottom: 24px; left: 24px; z-index: 2;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(20,15,10,.4);
+    padding: 8px 12px;
+    backdrop-filter: blur(6px);
+  }
+
+  .tienda__copy{ max-width: 480px; }
+  .tienda__title{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(36px, 4.4vw, 68px);
+    line-height: 1.04;
+    letter-spacing: -0.022em;
+    color: var(--deep);
+    margin: 20px 0 28px;
+  }
+  .tienda__title em{ font-style: italic; color: var(--mid); font-weight: 400; }
+  .tienda__lead{
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--deep);
+    opacity: .8;
+    margin-bottom: 40px;
+  }
+  .tienda__info{
+    border-top: 1px solid var(--soft);
+    padding-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 32px;
+  }
+  .tienda__info .item .k{
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 8px;
+  }
+  .tienda__info .item .v{
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--deep);
+    line-height: 1.4;
+  }
+  .tienda__info .item .v small{
+    display: block;
+    font-family: var(--sans);
+    font-size: 13px;
+    opacity: .65;
+    margin-top: 4px;
+  }
+  .tienda__cta{ margin-top: 36px; }
+
+  /* =====================================================
+     NEWSLETTER                                              */
+  .news{
+    padding: clamp(80px, 12vh, 120px) var(--page-pad);
+    background: var(--soft);
+    text-align: center;
+  }
+  .news__inner{ max-width: 720px; margin: 0 auto; }
+  .news__eyebrow{ justify-content: center; margin-bottom: 28px; }
+  .news__title{
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.6vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--deep);
+    margin: 0 0 32px;
+    font-weight: 500;
+  }
+  .news__title em{ font-style: italic; color: var(--mid); font-weight: 400; }
+  .news__form{
+    display: flex;
+    max-width: 520px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1px solid var(--light);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: border-color .25s var(--ease);
+  }
+  .news__form:focus-within{ border-color: var(--mid); }
+  .news__form input{
+    flex: 1;
+    border: none; outline: none;
+    background: transparent;
+    padding: 0 20px;
+    height: 54px;
+    font-size: 14px;
+    color: var(--deep);
+  }
+  .news__form input::placeholder{ color: var(--deep); opacity:.5; }
+  .news__form button{
+    height: 54px; padding: 0 28px;
+    background: var(--mid);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background .25s var(--ease);
+  }
+  .news__form button:hover{ background: var(--deep); }
+  .news__fine{
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--deep); opacity: .55;
+  }
+
+  /* =====================================================
+     FOOTER                                                  */
+  .foot{
+    background: var(--paper);
+    padding: clamp(64px, 10vh, 96px) var(--page-pad) 32px;
+    border-top: 1px solid var(--soft);
+  }
+  .foot__grid{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 64px;
+  }
+  .foot__brand .logo{
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--deep);
+    margin-bottom: 12px;
+  }
+  .foot__brand p{
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--deep); opacity: .7;
+    max-width: 320px;
+    margin: 0 0 24px;
+  }
+  .foot__brand .badges{
+    display: flex; gap: 8px;
+  }
+  .foot__brand .badges span{
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding: 5px 8px;
+    border: 1px solid var(--light);
+  }
+
+  /* Social icons */
+  .foot__social{
+    display: flex; gap: 10px;
+    margin-top: 24px;
+  }
+  .foot__social a{
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    border: 1px solid var(--light);
+    color: var(--deep);
+    border-radius: 999px;
+    transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), transform .2s var(--ease);
+  }
+  .foot__social a svg{ width: 16px; height: 16px; stroke-width: 1.6; }
+  .foot__social a:hover{
+    background: var(--mid);
+    color: var(--paper);
+    border-color: var(--mid);
+    transform: translateY(-2px);
+  }
+  .foot__col h4{
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin: 0 0 18px;
+    font-weight: 500;
+  }
+  .foot__col ul{
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .foot__col a{
+    font-size: 14px;
+    color: var(--deep);
+    transition: color .2s var(--ease);
+  }
+  .foot__col a:hover{ color: var(--mid); }
+
+  .foot__bottom{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--soft);
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--deep); opacity: .6;
+    letter-spacing: 0.04em;
+  }
+
+  /* =====================================================
+     RESPONSIVE                                              */
+  @media (max-width: 1080px){
+    .cat-card:nth-child(1){ grid-column: span 7; }
+    .cat-card:nth-child(2){ grid-column: span 5; }
+    .cat-card:nth-child(3){ grid-column: span 6; }
+    .cat-card:nth-child(4){ grid-column: span 6; }
+    .cat-card:nth-child(5){ grid-column: span 7; }
+    .cat-card:nth-child(6){ grid-column: span 5; }
+    .prod-grid{ grid-template-columns: repeat(2, 1fr); }
+    .tienda__grid{ grid-template-columns: 1fr; gap: 48px; }
+  }
+  @media (max-width: 760px){
+    .hero__inner{ grid-template-columns: 1fr; row-gap: 40px; }
+    .hero__copy{ grid-column:1; grid-row: 1; }
+    .hero__media{ grid-column: 1; grid-row: 2; height: 56vh; min-height: 380px; }
+    .hero__frame{ position: relative; left: 0; right: -24px; top:0; bottom:0; height:100%; }
+    .hero__bottom{ grid-row: 3; flex-direction: column; align-items: flex-start; gap: 24px; margin-top: 8px; padding-top: 32px; }
+    .nav{ grid-template-columns: 1fr auto; }
+    .nav__links{ display: none; }
+    .nav__right{ grid-column: 2; }
+    .cat-card{ grid-column: span 12 !important; }
+    .section-head{ grid-template-columns: 1fr; }
+    .section-head .right{ grid-column: 1; text-align: left; max-width: none; }
+    .foot__grid{ grid-template-columns: 1fr 1fr; gap: 32px; }
+    .tienda__info{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px){
+    .prod-grid{ grid-template-columns: 1fr; }
+    .foot__grid{ grid-template-columns: 1fr; }
+  }
+
+  #tweaks-root{ position: fixed; z-index: 100; }
+
+/* WhatsApp flotante */
+.wsp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #3b1a5a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(59,26,90,.45);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  text-decoration: none;
+}
+.wsp-float svg { width: 28px; height: 28px; }
+.wsp-float:hover {
+  background: #2a1240;
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(59,26,90,.6);
+}
+</style>
+</head>
+
+<body data-screen-label="01 Home">
+
+<!-- ============================== NAV ============================== -->
+<header class="nav" id="nav" data-comment-anchor="nav">
+  <a href="#" class="nav__logo">
+    La Tragonería <small>SEVILLA · 2005</small>
+  </a>
+  <nav>
+    <ul class="nav__links">
+      <li><a href="#categorias">Tienda</a></li>
+      <li><a href="#destacados">Destacados</a></li>
+      <li><a href="#">Cestas</a></li>
+      <li><a href="#tienda">Visítanos</a></li>
+      <li><a href="#">Nosotros</a></li>
+    </ul>
+  </nav>
+  <div class="nav__right">
+    <button class="icon-btn" aria-label="Buscar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+      </svg>
+    </button>
+    <a href="#categorias" class="btn btn--primary btn--cta">Comprar</a>
+    <button class="icon-btn cart-dot" aria-label="Carrito">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 4h2l2.5 12.5a2 2 0 0 0 2 1.5h8.5a2 2 0 0 0 2-1.6L21.5 8H6"/>
+        <circle cx="10" cy="20.5" r="1"/><circle cx="18" cy="20.5" r="1"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="hero" data-screen-label="Hero" data-comment-anchor="hero">
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <div class="hero__eyebrow eyebrow">
+        <span class="dot"></span>
+        <span><span class="idx">00 —</span> Delicatessen en Sevilla · Est. 2005</span>
+      </div>
+
+      <h1 class="hero__headline" id="headline">
+        <span class="num">20</span> años <br/>
+        eligiendo <span class="accent">lo mejor</span> <br/>
+        de España.
+      </h1>
+
+      <p class="hero__subline">
+        Tienda gourmet en Sevilla <span class="sep">·</span> Envío a toda España.
+      </p>
+
+      <div class="hero__ctas">
+        <a class="btn btn--primary" href="#categorias">
+          Explorar tienda
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
+          </svg>
+        </a>
+        <a class="btn btn--ghost" href="#">Crear tu cesta</a>
+      </div>
+    </div>
+
+    <div class="hero__media">
+      <div class="hero__frame">
+        <image-slot id="hero-img"
+                    placeholder="Foto editorial — producto protagonista (cesta, jamón, queso)"
+                    shape="rect"></image-slot>
+      </div>
+      <div class="hero__tag" id="hero-tag">
+        <span class="lab">Selección de la casa</span>
+        <span class="name">Cesta Reserva Andalucía</span>
+        <span class="meta">12 productos · packaging artesano</span>
+      </div>
+    </div>
+
+    <div class="hero__bottom">
+      <div class="hero__meta">
+        <div class="meta-item"><span class="k">Productos</span><span class="v">516 referencias</span></div>
+        <div class="meta-item"><span class="k">Envío</span><span class="v">Península 24–48h</span></div>
+        <div class="meta-item"><span class="k">Tienda física</span><span class="v">C/ Sierpes, Sevilla</span></div>
+      </div>
+      <div class="hero__scroll">
+        <span>Desplázate</span>
+        <span class="line"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CATEGORÍAS ============================== -->
+<section class="categorias" id="categorias" data-screen-label="Categorías">
+  <header class="section-head">
+    <div>
+      <div class="eyebrow gs-reveal"><span class="dot"></span><span class="idx">01 —</span> Categorías</div>
+      <h2 class="title gs-reveal">Selección por <em>familia</em> de producto.</h2>
+    </div>
+    <p class="right gs-reveal">
+      Seis familias, 516 referencias. Cada producto se prueba en tienda antes de entrar al catálogo.
+    </p>
+  </header>
+
+  <div class="cat-grid" id="catGrid">
+    <a href="#" class="cat-card cat-card--quesos gs-reveal">
+      <div class="cat-card__media">
+        <div class="cat-card__bg"></div>
+        <span class="cat-card__label">01</span>
+        <div class="cat-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M9 7h8v8"/></svg></div>
+        <div class="cat-card__info">
+          <h3 class="cat-card__name">Quesos artesanos</h3>
+          <span class="cat-card__count">142 ref.</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="cat-card cat-card--vinos gs-reveal">
+      <div class="cat-card__media">
+        <div class="cat-card__bg"></div>
+        <span class="cat-card__label">02</span>
+        <div class="cat-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M9 7h8v8"/></svg></div>
+        <div class="cat-card__info">
+          <h3 class="cat-card__name">Vinos &amp; vermuts</h3>
+          <span class="cat-card__count">98 ref.</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="cat-card cat-card--ibericos gs-reveal">
+      <div class="cat-card__media">
+        <div class="cat-card__bg"></div>
+        <span class="cat-card__label">03</span>
+        <div class="cat-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M9 7h8v8"/></svg></div>
+        <div class="cat-card__info">
+          <h3 class="cat-card__name">Ibéricos</h3>
+          <span class="cat-card__count">64 ref.</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="cat-card cat-card--aceites gs-reveal">
+      <div class="cat-card__media">
+        <div class="cat-card__bg"></div>
+        <span class="cat-card__label">04</span>
+        <div class="cat-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M9 7h8v8"/></svg></div>
+        <div class="cat-card__info">
+          <h3 class="cat-card__name">Aceites &amp; vinagres</h3>
+          <span class="cat-card__count">52 ref.</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="cat-card cat-card--conservas gs-reveal">
+      <div class="cat-card__media">
+        <div class="cat-card__bg"></div>
+        <span class="cat-card__label">05</span>
+        <div class="cat-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M9 7h8v8"/></svg></div>
+        <div class="cat-card__info">
+          <h3 class="cat-card__name">Conservas &amp; ahumados</h3>
+          <span class="cat-card__count">87 ref.</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="cat-card cat-card--eco gs-reveal">
+      <div class="cat-card__media">
+        <div class="cat-card__bg"></div>
+        <span class="cat-card__label">06</span>
+        <div class="cat-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 17L17 7M9 7h8v8"/></svg></div>
+        <div class="cat-card__info">
+          <h3 class="cat-card__name">Eco &amp; artesano</h3>
+          <span class="cat-card__count">73 ref.</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============================== DESTACADOS ============================== -->
+<section class="destacados" id="destacados" data-screen-label="Destacados">
+  <header class="section-head">
+    <div>
+      <div class="eyebrow gs-reveal"><span class="dot"></span><span class="idx">02 —</span> Lo más pedido</div>
+      <h2 class="title gs-reveal">Los favoritos <em>de la casa.</em></h2>
+    </div>
+    <p class="right gs-reveal">
+      Lo que los clientes piden semana tras semana. Producto fresco, rotación constante.
+    </p>
+  </header>
+
+  <div class="prod-grid" id="prodGrid">
+    <a href="#" class="prod-card prod--p1 gs-reveal">
+      <div class="prod-card__media">
+        <div class="prod-card__bg"></div>
+        <span class="prod-card__tag">Ibérico</span>
+        <button class="prod-card__quick" aria-label="Añadir al carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="prod-card__info">
+        <h3 class="prod-card__name">Jamón Ibérico de Bellota</h3>
+        <p class="prod-card__sub">Pieza entera · 7 kg aprox.</p>
+        <div class="prod-card__bottom">
+          <span class="prod-card__price">389 €<small>/pza</small></span>
+          <span class="prod-card__do">D.O. Jabugo</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="prod-card prod--p2 gs-reveal">
+      <div class="prod-card__media">
+        <div class="prod-card__bg"></div>
+        <span class="prod-card__tag">Queso</span>
+        <button class="prod-card__quick" aria-label="Añadir al carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="prod-card__info">
+        <h3 class="prod-card__name">Torta del Casar</h3>
+        <p class="prod-card__sub">Queso crudo de oveja · 500 g</p>
+        <div class="prod-card__bottom">
+          <span class="prod-card__price">24 €<small>/ud</small></span>
+          <span class="prod-card__do">D.O.P.</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="prod-card prod--p3 gs-reveal">
+      <div class="prod-card__media">
+        <div class="prod-card__bg"></div>
+        <span class="prod-card__tag">Aceite</span>
+        <button class="prod-card__quick" aria-label="Añadir al carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="prod-card__info">
+        <h3 class="prod-card__name">Picual Extra Virgen</h3>
+        <p class="prod-card__sub">Cosecha temprana · 500 ml</p>
+        <div class="prod-card__bottom">
+          <span class="prod-card__price">18 €<small>/ud</small></span>
+          <span class="prod-card__do">Jaén · Eco</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="prod-card prod--p4 gs-reveal">
+      <div class="prod-card__media">
+        <div class="prod-card__bg"></div>
+        <span class="prod-card__tag">Vino</span>
+        <button class="prod-card__quick" aria-label="Añadir al carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="prod-card__info">
+        <h3 class="prod-card__name">Vermut Reserva</h3>
+        <p class="prod-card__sub">Botánicos andaluces · 750 ml</p>
+        <div class="prod-card__bottom">
+          <span class="prod-card__price">21 €<small>/ud</small></span>
+          <span class="prod-card__do">Sevilla</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============================== STATEMENT (banda) ============================== -->
+<section class="statement" id="statement" data-screen-label="Statement">
+  <div class="statement__inner">
+    <div class="eyebrow statement__eyebrow gs-reveal">
+      <span class="dot"></span><span class="idx">03 —</span> Manifiesto
+    </div>
+    <p class="statement__text gs-reveal">
+      516 productos. Un solo criterio: <em>que merezcan estar aquí.</em>
+    </p>
+    <div class="statement__sign gs-reveal">
+      <span class="rule"></span><span>La Tragonería · Sevilla</span><span class="rule"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TIENDA ============================== -->
+<section class="tienda" id="tienda" data-screen-label="Tienda">
+  <div class="tienda__grid">
+    <div class="tienda__media gs-reveal">
+      <image-slot id="tienda-img"
+                  placeholder="Foto del local — interior, escaparate o detalle de la barra"
+                  shape="rect"></image-slot>
+      <span class="tienda__media-tag">C/ Sierpes 34 · Sevilla</span>
+    </div>
+
+    <div class="tienda__copy">
+      <div class="eyebrow gs-reveal"><span class="dot"></span><span class="idx">04 —</span> Tienda física</div>
+      <h2 class="tienda__title gs-reveal">Pasa a probar antes de <em>comprar.</em></h2>
+      <p class="tienda__lead gs-reveal">
+        En pleno centro de Sevilla. Cortamos jamón al momento, descorchamos lo que pidas y montamos cestas mientras esperas. Si vienes con tiempo, te invitamos a una cata.
+      </p>
+      <div class="tienda__info gs-reveal">
+        <div class="item">
+          <span class="k">Dirección</span>
+          <span class="v">Calle Sierpes, 34<small>41004 Sevilla</small></span>
+        </div>
+        <div class="item">
+          <span class="k">Horario</span>
+          <span class="v">Lun — Sáb · 10–21h<small>Domingos cerrado</small></span>
+        </div>
+        <div class="item">
+          <span class="k">Teléfono</span>
+          <span class="v">+34 954 22 18 60<small>WhatsApp disponible</small></span>
+        </div>
+        <div class="item">
+          <span class="k">Reservas</span>
+          <span class="v">Catas privadas<small>Hasta 12 personas</small></span>
+        </div>
+      </div>
+      <div class="tienda__cta gs-reveal">
+        <a href="https://www.google.com/maps/place/La+Tragoner%C3%ADa+Gourmet+y+Vinos+Sevilla/@37.38756,-5.970819,18z/data=!4m6!3m5!1s0xd126ebb3deeac2d:0xf6bab33da520daf6!8m2!3d37.3875603!4d-5.9708189!16s%2Fg%2F12jskqrgf" target="_blank" rel="noopener" class="btn btn--ink">
+          Cómo llegar
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17L17 7M9 7h8v8"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== NEWSLETTER ============================== -->
+<section class="news" data-screen-label="Newsletter">
+  <div class="news__inner">
+    <div class="eyebrow news__eyebrow gs-reveal"><span class="dot"></span><span class="idx">05 —</span> Carta de novedades</div>
+    <h2 class="news__title gs-reveal">Nuevas entradas, catas y cestas — <em>una vez al mes.</em></h2>
+    <form class="news__form gs-reveal" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Suscrito';">
+      <input type="email" placeholder="tu@correo.com" required />
+      <button type="submit">Suscribirme</button>
+    </form>
+    <p class="news__fine">Sin spam. Cancela cuando quieras.</p>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div class="foot__brand">
+      <div class="logo">La Tragonería</div>
+      <p>Tienda gourmet en Sevilla desde 2005. Selección, corte y envío de delicatessen a toda España.</p>
+      <div class="badges">
+        <span>SSL</span><span>Pago seguro</span><span>Envío 24/48h</span>
+      </div>
+      <div class="foot__social">
+        <a href="https://www.instagram.com/la_tragoneria/" target="_blank" rel="noopener" aria-label="Instagram" title="Síguenos en Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="https://www.google.com/maps/place/La+Tragoner%C3%ADa+Gourmet+y+Vinos+Sevilla/@37.38756,-5.970819,18z/data=!4m6!3m5!1s0xd126ebb3deeac2d:0xf6bab33da520daf6!8m2!3d37.3875603!4d-5.9708189!16s%2Fg%2F12jskqrgf" target="_blank" rel="noopener" aria-label="Google Maps" title="Vernos en Google Maps">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/>
+            <circle cx="12" cy="10" r="2.5"/>
+          </svg>
+        </a>
+        <a href="mailto:hola@latragoneria.com" aria-label="Email" title="Escríbenos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="m3 7 9 6 9-6"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/34626904944" target="_blank" rel="noopener" aria-label="WhatsApp" title="Escríbenos por WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="foot__col">
+      <h4>Tienda</h4>
+      <ul>
+        <li><a href="#">Quesos</a></li>
+        <li><a href="#">Vinos</a></li>
+        <li><a href="#">Ibéricos</a></li>
+        <li><a href="#">Aceites</a></li>
+        <li><a href="#">Cestas</a></li>
+      </ul>
+    </div>
+    <div class="foot__col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#">Sobre nosotros</a></li>
+        <li><a href="#">Tienda física</a></li>
+        <li><a href="#">Catas privadas</a></li>
+        <li><a href="#">Empresas</a></li>
+      </ul>
+    </div>
+    <div class="foot__col">
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="#">Envíos</a></li>
+        <li><a href="#">Devoluciones</a></li>
+        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Aviso legal</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot__bottom">
+    <span>© 2026 LA TRAGONERÍA · SEVILLA</span>
+    <span>HECHO CON CARIÑO EN ANDALUCÍA</span>
+  </div>
+</footer>
+
+<div id="tweaks-root"></div>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/34626904944" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp" class="wsp-float">
+  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.103 1.523 5.824L.057 23.272a.75.75 0 0 0 .916.916l5.448-1.466A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.707 9.707 0 0 1-4.953-1.354l-.355-.212-3.676.99.99-3.587-.23-.368A9.71 9.71 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+  </svg>
+</a>
+
+<!-- ============================== SCRIPTS ============================== -->
+<script src="image-slot.js"></script>
+
+<!-- GSAP for scroll-triggered reveals -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 60) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+</script>
+
+<script>
+  // GSAP scroll reveals — pleasant, restrained
+  (function initReveals(){
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      // Fallback: simple IntersectionObserver
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.transition = 'opacity .8s ease, transform .8s ease';
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+            io.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px' });
+      document.querySelectorAll('.gs-reveal').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(28px)';
+        io.observe(el);
+      });
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+    document.body.classList.add('gs-ready');
+
+    // HERO entry (immediate, on load)
+    gsap.timeline({ defaults: { ease: 'expo.out' } })
+      .from('.hero__eyebrow', { y: 24, opacity: 0, duration: 0.9, delay: 0.05 })
+      .from('.hero__headline', { y: 36, opacity: 0, duration: 1.1 }, '-=0.7')
+      .from('.hero__subline', { y: 22, opacity: 0, duration: 0.9 }, '-=0.75')
+      .from('.hero__ctas',    { y: 22, opacity: 0, duration: 0.9 }, '-=0.7')
+      .from('.hero__frame',   { clipPath: 'inset(0 0 100% 0)', opacity: 0, duration: 1.3 }, '-=1.2')
+      .from('.hero__tag',     { y: 24, opacity: 0, duration: 0.8 }, '-=0.4')
+      .from('.hero__bottom',  { opacity: 0, duration: 0.8 }, '-=0.5');
+
+    // Section headers + generic reveals
+    document.querySelectorAll('.section-head .gs-reveal').forEach((el) => {
+      gsap.to(el, {
+        y: 0, opacity: 1, duration: 1,
+        ease: 'expo.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' }
+      });
+    });
+
+    // Categories stagger
+    gsap.to('#catGrid .gs-reveal', {
+      y: 0, opacity: 1, duration: 1, ease: 'expo.out',
+      stagger: { each: 0.08, from: 0 },
+      scrollTrigger: { trigger: '#catGrid', start: 'top 80%' }
+    });
+
+    // Products stagger
+    gsap.to('#prodGrid .gs-reveal', {
+      y: 0, opacity: 1, duration: 1, ease: 'expo.out',
+      stagger: { each: 0.1 },
+      scrollTrigger: { trigger: '#prodGrid', start: 'top 82%' }
+    });
+
+    // Statement
+    gsap.to('.statement .gs-reveal', {
+      y: 0, opacity: 1, duration: 1.1, ease: 'expo.out',
+      stagger: 0.12,
+      scrollTrigger: { trigger: '.statement', start: 'top 72%' }
+    });
+
+    // Tienda — image + copy
+    gsap.to('.tienda .gs-reveal', {
+      y: 0, opacity: 1, duration: 1, ease: 'expo.out',
+      stagger: 0.08,
+      scrollTrigger: { trigger: '.tienda', start: 'top 75%' }
+    });
+
+    // Newsletter
+    gsap.to('.news .gs-reveal', {
+      y: 0, opacity: 1, duration: 1, ease: 'expo.out',
+      stagger: 0.08,
+      scrollTrigger: { trigger: '.news', start: 'top 80%' }
+    });
+  })();
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+
+<script type="text/babel">
+const { useEffect } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "catLayout": "asymmetric",
+  "prodCols": 4,
+  "accentDose": "balanced",
+  "showStatement": true,
+  "showNewsletter": true
+}/*EDITMODE-END*/;
+
+const ACCENT_DOSES = {
+  minimal:  { mid: '#A39BC8', light: '#DCD6EC', soft: '#F1EEF6' },
+  balanced: { mid: '#8E7CC3', light: '#C8BFE7', soft: '#E8E4F0' },
+  bold:     { mid: '#7B68B6', light: '#B8ABDE', soft: '#DDD5ED' },
+};
+
+function HomeTweaks(){
+  const { TweaksPanel, useTweaks, TweakSection, TweakRadio, TweakToggle } = window;
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  // Categories layout
+  useEffect(() => {
+    const grid = document.getElementById('catGrid');
+    if (!grid) return;
+    const cards = grid.querySelectorAll('.cat-card');
+    if (t.catLayout === 'regular') {
+      cards.forEach(c => { c.style.gridColumn = 'span 4'; });
+    } else {
+      const spans = [5,4,3,4,5,3];
+      cards.forEach((c, i) => { c.style.gridColumn = `span ${spans[i] || 4}`; });
+    }
+  }, [t.catLayout]);
+
+  // Product columns
+  useEffect(() => {
+    const grid = document.getElementById('prodGrid');
+    if (!grid) return;
+    grid.style.gridTemplateColumns = `repeat(${t.prodCols}, 1fr)`;
+  }, [t.prodCols]);
+
+  // Accent dose
+  useEffect(() => {
+    const dose = ACCENT_DOSES[t.accentDose] || ACCENT_DOSES.balanced;
+    const r = document.documentElement.style;
+    r.setProperty('--mid', dose.mid);
+    r.setProperty('--light', dose.light);
+    r.setProperty('--soft', dose.soft);
+  }, [t.accentDose]);
+
+  // Section visibility
+  useEffect(() => {
+    const el = document.getElementById('statement');
+    if (el) el.style.display = t.showStatement ? '' : 'none';
+  }, [t.showStatement]);
+
+  useEffect(() => {
+    const el = document.querySelector('.news');
+    if (el) el.style.display = t.showNewsletter ? '' : 'none';
+  }, [t.showNewsletter]);
+
+  return (
+    <TweaksPanel title="Tweaks · Home">
+      <TweakSection title="Categorías">
+        <TweakRadio
+          label="Layout del grid"
+          value={t.catLayout}
+          onChange={v => setTweak('catLayout', v)}
+          options={[
+            { value: 'asymmetric', label: 'Asimétrico editorial' },
+            { value: 'regular',    label: 'Regular 3 col.' },
+          ]}
+        />
+      </TweakSection>
+
+      <TweakSection title="Productos destacados">
+        <TweakRadio
+          label="Columnas"
+          value={String(t.prodCols)}
+          onChange={v => setTweak('prodCols', parseInt(v))}
+          options={[
+            { value: '4', label: '4 col.' },
+            { value: '3', label: '3 col.' },
+            { value: '2', label: '2 col.' },
+          ]}
+        />
+      </TweakSection>
+
+      <TweakSection title="Acento lila">
+        <TweakRadio
+          label="Intensidad"
+          value={t.accentDose}
+          onChange={v => setTweak('accentDose', v)}
+          options={[
+            { value: 'minimal',  label: 'Mínimo' },
+            { value: 'balanced', label: 'Equilibrado' },
+            { value: 'bold',     label: 'Más presente' },
+          ]}
+        />
+        <div style={{
+          fontSize: 11, color:'#6B5B95', opacity:.65, marginTop:8, lineHeight:1.4,
+          fontFamily:'DM Sans, sans-serif'
+        }}>
+          Sólo afecta a CTAs, eyebrows y hairlines — el fondo cream se mantiene.
+        </div>
+      </TweakSection>
+
+      <TweakSection title="Secciones">
+        <TweakToggle
+          label="Banda manifiesto (full-bleed lila)"
+          value={t.showStatement}
+          onChange={v => setTweak('showStatement', v)}
+        />
+        <TweakToggle
+          label="Newsletter"
+          value={t.showNewsletter}
+          onChange={v => setTweak('showNewsletter', v)}
+        />
+      </TweakSection>
+    </TweaksPanel>
+  );
+}
+
+const mountTweaks = () => {
+  if (!window.TweaksPanel || !window.useTweaks) { setTimeout(mountTweaks, 50); return; }
+  const root = ReactDOM.createRoot(document.getElementById('tweaks-root'));
+  root.render(<HomeTweaks />);
+};
+mountTweaks();
+</script>
+
+</body>
+</html>
